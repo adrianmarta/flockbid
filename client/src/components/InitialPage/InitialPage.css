@@ -1,0 +1,58 @@
+/* src/components/InitialPage/InitialPage.css */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Create three equal columns */
+    grid-template-rows: 1fr; /* Single row */
+    width: 100%;
+    height: 100%;
+}
+
+.image-item {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.text-box {
+    font-weight: bold;
+    position: absolute;
+    top: 70%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.button-group {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+}

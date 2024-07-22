@@ -12,3 +12,5 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+// In your server setup file (e.g., server.js or app.js)
+app.use('/uploads', express.static('uploads'));

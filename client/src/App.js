@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { fetchGreeting } from './api';
+// src/App.js
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import CreateUser from './components/createUser/createUser';
+import UserList from './components/UserList';
+import HomePage from './components/HomePage/HomePage';
+import LoginPage from './components/LoginPage/LoginPage';
+import AddFlockPage from './components/AddFlockPage/AddFlockPage';
+import InitialPage from "./components/InitialPage/InitialPage";
 
-function App() {
-  const [greeting, setGreeting] = useState('');
-
-  useEffect(() => {
-    const getGreeting = async () => {
-      const message = await fetchGreeting();
-      setGreeting(message);
-    };
-
-    getGreeting();
-  }, []);
-
-  return (
-      <div className="App">
-        <header className="App-header">
-          <h1>{greeting}</h1>
-        </header>
-      </div>
-  );
-}
+const App = () => {
+    return (
+        <div>
+            <Routes>
+                <Route path="/" element={<InitialPage />} />
+                <Route path="/users" element={<UserList />} />
+                <Route path="/create" element={<CreateUser />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/home-page" element={<HomePage />} />
+                <Route path="/add-flock" element={<AddFlockPage />} />
+            </Routes>
+        </div>
+    );
+};
 
 export default App;
