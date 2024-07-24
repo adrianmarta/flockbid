@@ -1,6 +1,7 @@
 // src/components/LoginPage.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './LoginPage.css'; // Import the CSS file for styling
 
 const LoginPage = () => {
@@ -11,6 +12,7 @@ const LoginPage = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({
@@ -33,6 +35,7 @@ const LoginPage = () => {
                 email: '',
                 password: ''
             });
+            navigate('/home-page'); // Redirect to the home page after successful login
         } catch (error) {
             setError(error.response?.data?.message || 'An error occurred. Please try again.');
         } finally {

@@ -7,6 +7,7 @@ import HomePage from './components/HomePage/HomePage';
 import LoginPage from './components/LoginPage/LoginPage';
 import AddFlockPage from './components/AddFlockPage/AddFlockPage';
 import InitialPage from "./components/InitialPage/InitialPage";
+import FlockDetails from "./components/FlockDetails/FlockDetails";
 
 const App = () => {
     return (
@@ -18,6 +19,7 @@ const App = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/home-page" element={<HomePage />} />
                 <Route path="/add-flock" element={<AddFlockPage />} />
+                <Route path="/flock-details/:id" element={<FlockDetails />} />
             </Routes>
         </div>
     );

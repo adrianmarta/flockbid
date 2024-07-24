@@ -1,4 +1,3 @@
-// controllers/flockController.js
 const Flock = require('../models/flock');
 
 exports.createFlock = async (req, res, next) => {

@@ -1,6 +1,6 @@
 // src/components/AddFlockPage.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from './../../axiosConfig';
 import './AddFlockPage.css'; // Import CSS for styling
 
 const AddFlockPage = () => {
@@ -48,7 +48,7 @@ const AddFlockPage = () => {
                 data.append('images', files[i]);
             }
 
-            const response = await axios.post('/api/flocks', data, {
+            const response = await axios.post('/flocks', data, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

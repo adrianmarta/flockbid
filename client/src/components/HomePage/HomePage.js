@@ -1,67 +1,77 @@
-// src/components/HomePage/HomePage.js
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import './HomePage.css'; // Import CSS for styling
+import React, { useState, useEffect } from 'react';
+import axios from './../../axiosConfig';
+import { jwtDecode } from 'jwt-decode';
+import { Link, useNavigate } from 'react-router-dom';
+import './HomePage.css';
 
 const HomePage = () => {
     const [flocks, setFlocks] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchFlocks = async () => {
             try {
-                const response = await axios.get('/api/flocks');
+                const response = await axios.get('/flocks');
                 setFlocks(response.data);
-            } catch (err) {
-                setError('Failed to fetch flocks');
-            } finally {
-                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching flocks:', error);
+            }
+        };
+
+        const checkAdmin = () => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                const decoded = jwtDecode(token);
+                setIsAdmin(decoded.isAdmin);
             }
         };
 
         fetchFlocks();
+        checkAdmin();
     }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/login');
+    };
+
+    const handleFlockClick = (id) => {
+        navigate(`/flocks/${id}`);
+    };
 
     return (
         <div className="home-page">
             <header className="header">
                 <h1>FlockBid</h1>
                 <div className="header-buttons">
-                    <Link to="/add-flock" className="header-button">Add Flock</Link>
-                    <button className="header-button">Sign Out</button>
+                    {isAdmin && (
+                        <Link to="/add-flock">
+                            <button>Add Flock</button>
+                        </Link>
+                    )}
+                    <button onClick={handleLogout}>Sign Out</button>
                 </div>
             </header>
-            <main className="flock-container">
-                {loading && <p>Loading...</p>}
-                {error && <p>{error}</p>}
-                {flocks.length === 0 && <p>No flocks available</p>}
-                {flocks.map(flock => (
-                    <div key={flock._id} className="flock-card">
-                        <div className="flock-images">
-                            {flock.images.length > 0 ? (
-                                flock.images.map((image, index) => (
-                                    <img
-                                        key={index}
-                                        src={`/uploads/${image}`} // Adjust the path to your file storage
-                                        alt={flock.name}
-                                        className="flock-image"
-                                    />
-                                ))
-                            ) : (
-                                <div className="no-image">No Image</div>
-                            )}
-                        </div>
+            <div className="flock-list">
+                {flocks.map((flock) => (
+                    <div
+                        className="flock-box"
+                        key={flock._id}
+                        onClick={() => handleFlockClick(flock._id)}
+                    >
+                        {flock.images.length > 0 && (
+                            <img src={`/uploads/${flock.images[0]}`} alt={flock.name} />
+                        )}
                         <div className="flock-info">
-                            <h2 className="flock-name">{flock.name}</h2>
-                            <p className="flock-price">${flock.price.toFixed(2)}</p>
+                            <h2>{flock.name}</h2>
+                            <p>Price: ${flock.price}</p>
                         </div>
                     </div>
                 ))}
-            </main>
+            </div>
         </div>
     );
 };
 
-export default HomePage;
+export default HomePage
