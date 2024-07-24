@@ -70,3 +70,4 @@ exports.placeBid = async (req, res, next) => {
         next(error);
     }
 };
+

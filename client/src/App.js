@@ -19,7 +19,7 @@ const App = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/home-page" element={<HomePage />} />
                 <Route path="/add-flock" element={<AddFlockPage />} />
-                <Route path="/flock-details/:id" element={<FlockDetails />} />
+                <Route path="/flocks/:id" element={<FlockDetails />} />
             </Routes>
         </div>
     );

@@ -1,28 +1,48 @@
 .flock-details-container {
     max-width: 600px;
-    margin: 50px auto;
+    margin: 0 auto;
     padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+img {
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.bid-input-container {
+    margin-top: 20px;
+}
+
+.bid-input-container input {
+    width: calc(50% - 10px);
+    padding: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    text-align: center;
+    border-radius: 4px;
 }
 
-.flock-details-container h2 {
-    margin-bottom: 20px;
-}
-
-.flock-images {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-}
-
-.flock-images img {
-    max-width: 150px;
-    max-height: 150px;
-    object-fit: cover;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+.bid-input-container button {
+    width: calc(100% - 20px);
+    margin-left: 10px;
 }

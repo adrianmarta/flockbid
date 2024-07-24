@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const db = require('./config/db');
-const userRoutes = require('./routes/userRoutes');
-const flockRoutes = require('./routes/flockRoutes'); // Import the flock routes
+const db = require('./server/config/db');
+const userRoutes = require('./server/routes/userRoutes');
+const flockRoutes = require('./server/routes/flockRoutes'); // Import the flock routes
 
 const app = express();
 const port = 4000;
