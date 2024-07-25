@@ -8,6 +8,7 @@ import LoginPage from './components/LoginPage/LoginPage';
 import AddFlockPage from './components/AddFlockPage/AddFlockPage';
 import InitialPage from "./components/InitialPage/InitialPage";
 import FlockDetails from "./components/FlockDetails/FlockDetails";
+import BiddersDisplay from "./components/BiddersDisplay/BiddersDisplay";
 
 const App = () => {
     return (
@@ -20,6 +21,7 @@ const App = () => {
                 <Route path="/home-page" element={<HomePage />} />
                 <Route path="/add-flock" element={<AddFlockPage />} />
                 <Route path="/flocks/:id" element={<FlockDetails />} />
+                <Route path="/admin/bidders" element={<BiddersDisplay />} />
             </Routes>
         </div>
     );

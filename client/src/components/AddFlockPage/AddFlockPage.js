@@ -1,7 +1,8 @@
 // src/components/AddFlockPage.js
 import React, { useState } from 'react';
 import axios from './../../axiosConfig';
-import './AddFlockPage.css'; // Import CSS for styling
+import './AddFlockPage.css';
+import {Link, useNavigate} from "react-router-dom"; // Import CSS for styling
 
 const AddFlockPage = () => {
     const [formData, setFormData] = useState({
@@ -16,6 +17,7 @@ const AddFlockPage = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
+    const navigate= useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -70,97 +72,113 @@ const AddFlockPage = () => {
             setLoading(false);
         }
     };
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/login');
+    };
+
 
     return (
-        <div className="add-flock-container">
-            <div className="form-container">
-                <h2>Add a New Flock</h2>
-                {success && <p className="success-message">{success}</p>}
-                {error && <p className="error-message">{error}</p>}
-                <form onSubmit={handleSubmit}>
-                    <div className="input-group">
-                        <label htmlFor="name">Name:</label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="origin">Origin:</label>
-                        <input
-                            type="text"
-                            id="origin"
-                            name="origin"
-                            value={formData.origin}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="numberOfSheep">Number of Sheep:</label>
-                        <input
-                            type="number"
-                            id="numberOfSheep"
-                            name="numberOfSheep"
-                            value={formData.numberOfSheep}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="biddingEndDate">Bidding End Date:</label>
-                        <input
-                            type="datetime-local"
-                            id="biddingEndDate"
-                            name="biddingEndDate"
-                            value={formData.biddingEndDate}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="description">Description:</label>
-                        <textarea
-                            id="description"
-                            name="description"
-                            value={formData.description}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="price">Price:</label>
-                        <input
-                            type="number"
-                            id="price"
-                            name="price"
-                            value={formData.price}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="images">Upload Images:</label>
-                        <input
-                            type="file"
-                            id="images"
-                            name="images"
-                            accept="image/*"
-                            multiple
-                            onChange={handleFileChange}
-                        />
-                    </div>
-                    <button type="submit" disabled={loading}>
-                        {loading ? 'Submitting...' : 'Add Flock'}
-                    </button>
-                </form>
+        <div className="flock-page">
+            <header className="header">
+                <h1>FlockBid</h1>
+                <div className="header-buttons">
+
+                    <button onClick={handleLogout}>Sign Out</button>
+                </div>
+            </header>
+            <div className="add-flock-container">
+                <div className="form-container">
+                    <h2>Add a New Flock</h2>
+                    {success && <p className="success-message">{success}</p>}
+                    {error && <p className="error-message">{error}</p>}
+                    <form onSubmit={handleSubmit}>
+                        <div className="input-group">
+                            <label htmlFor="name">Name:</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="origin">Origin:</label>
+                            <input
+                                type="text"
+                                id="origin"
+                                name="origin"
+                                value={formData.origin}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="numberOfSheep">Number of Sheep:</label>
+                            <input
+                                type="number"
+                                id="numberOfSheep"
+                                name="numberOfSheep"
+                                value={formData.numberOfSheep}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="biddingEndDate">Bidding End Date:</label>
+                            <input
+                                type="datetime-local"
+                                id="biddingEndDate"
+                                name="biddingEndDate"
+                                value={formData.biddingEndDate}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="description">Description:</label>
+                            <textarea
+                                id="description"
+                                name="description"
+                                value={formData.description}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="price">Price:</label>
+                            <input
+                                type="number"
+                                id="price"
+                                name="price"
+                                value={formData.price}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="images">Upload Images:</label>
+                            <input
+                                type="file"
+                                id="images"
+                                name="images"
+                                accept="image/*"
+                                multiple
+                                onChange={handleFileChange}
+                            />
+                        </div>
+                        <button type="submit" disabled={loading}>
+                            {loading ? 'Submitting...' : 'Add Flock'}
+                        </button>
+                    </form>
+                </div>
             </div>
+
         </div>
     );
+
 };
 
 export default AddFlockPage;

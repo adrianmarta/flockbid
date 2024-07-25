@@ -1,6 +1,3 @@
-// models/flock.js
-const mongoose = require('mongoose');
-
 const flockSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -36,6 +33,10 @@ const flockSchema = new mongoose.Schema({
             required: true
         },
         amount: {
+            type: Number,
+            required: true
+        },
+        size: {
             type: Number,
             required: true
         }

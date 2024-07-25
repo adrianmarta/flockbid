@@ -45,7 +45,7 @@ exports.getFlockById = async (req, res, next) => {
 
 exports.placeBid = async (req, res, next) => {
     const { id } = req.params;
-    const { userId, amount } = req.body;
+    const { userId, amount, size } = req.body;
 
     try {
         const flock = await Flock.findById(id);
@@ -60,8 +60,9 @@ exports.placeBid = async (req, res, next) => {
         const existingBidIndex = flock.bids.findIndex(bid => bid.user.toString() === userId);
         if (existingBidIndex !== -1) {
             flock.bids[existingBidIndex].amount = amount;
+            flock.bids[existingBidIndex].size = size;
         } else {
-            flock.bids.push({ user: userId, amount });
+            flock.bids.push({ user: userId, amount, size });
         }
 
         await flock.save();

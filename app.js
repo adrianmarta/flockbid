@@ -2,18 +2,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./server/config/db');
 const userRoutes = require('./server/routes/userRoutes');
-const flockRoutes = require('./server/routes/flockRoutes'); // Import the flock routes
+const flockRoutes = require('./server/routes/flockRoutes');
+const adminRoutes = require('./server/routes/adminRoutes'); // Import admin routes
 
 const app = express();
 const port = 4000;
 
 // Middleware
 app.use(bodyParser.json());
-app.use('/uploads', express.static('uploads')); // Serve static files from the uploads directory
 
 // Routes
 app.use('/api/users', userRoutes);
-app.use('/api/flocks', flockRoutes); // Use the flock routes
+app.use('/api/flocks', flockRoutes);
+app.use('/api/admin', adminRoutes); // Use the admin routes
 
 // Error handling middleware
 app.use((err, req, res, next) => {

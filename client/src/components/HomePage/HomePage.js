@@ -46,6 +46,9 @@ const HomePage = () => {
                 <h1>FlockBid</h1>
                 <div className="header-buttons">
                     {isAdmin && (
+                        <li><Link to="/admin/bidders">Admin Bidders Page</Link></li>
+                    )}
+                    {isAdmin && (
                         <Link to="/add-flock">
                             <button>Add Flock</button>
                         </Link>
